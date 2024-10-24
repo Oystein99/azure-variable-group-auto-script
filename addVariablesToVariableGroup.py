@@ -20,7 +20,7 @@ def readAppsettings(data, keystring, appsettingsDict):
 
     return appsettingsDict
 
-def main(argv):
+def getArguments(argv):
     groupId = ''
     appsettingsFilePath = ''
 
@@ -38,13 +38,11 @@ def main(argv):
             groupId = arg
         elif opt in ("-a"):
             appsettingsFilePath = os.path.abspath(arg)
-        
-    with open(appsettingsFilePath, encoding='utf-8-sig') as f:
-        data = json.load(f)
-    appsettingsDicts = {}
-    appsettingsDict = readAppsettings(data, "", appsettingsDicts)
-    
-    for k, v in appsettingsDict.items():
+
+    return groupId, appsettingsFilePath
+
+def uploadVariables(appsettingsDictionary, groupId):
+    for k, v in appsettingsDictionary.items():
         name = k
         value = v
 
@@ -54,6 +52,16 @@ def main(argv):
             print("%s", completed.stderr)
         else:
             print(f"Added to the variable group: {name}: {value}")
+
+def main(argv):
+    
+    groupId, appsettingsFilePath = getArguments(argv)
+        
+    with open(appsettingsFilePath, encoding='utf-8-sig') as f:
+        data = json.load(f)
+    appsettingsDict = readAppsettings(data, "", {})
+    
+    uploadVariables(appsettingsDict, groupId)
 
 if __name__ == '__main__':
     main(sys.argv[1:])
