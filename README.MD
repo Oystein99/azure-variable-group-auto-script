@@ -44,4 +44,12 @@ Now you can use the script. First you download the script, then you use the scri
 
 It will then begin to add the your config variables to your devops variable group. If any errors happen they are printet to the console.
 
+How to use variable groups for your project is out of scope for this readme. For resources pertaining to their use case, you can read Microsoft's official documentation [Variable groups](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=azure-pipelines-ui%2Cyaml)
+
+## Things to be aware of
+
 If you want a variable to be secret, you will have to manually set it to secret after running the script.
+
+For the variable groups to work as a replacement for appsettings.Environment.json, you will still need the base appsettings.json file to exist in the code base.
+
+The name for each variable in the variable groups is case sensetive to the exisiting name in the appsettings.json file.
