@@ -10,7 +10,7 @@ def readAppsettings(data, keystring, appsettingsDict):
             if keystring == "":
                 appsettingsDict = readAppsettings(v, k, appsettingsDict)
             else:
-                appsettingsDict = readAppsettings(v, keystring+"."+k, appsettingsDict)
+                appsettingsDict = readAppsettings(v, keystring+"__"+k, appsettingsDict)
             
         else:
             if keystring == "":
